@@ -1,4 +1,7 @@
 <?php
+// Iniciar la sesión para almacenar el último dato
+session_start();
+
 // Configuración de cabecera para JSON
 header("Content-Type: application/json");
 
@@ -22,6 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } 
         // Si pasa las validaciones
         else {
+            // Guardar el último dato recibido en la sesión
+            $_SESSION["ultimo_dato"] = ["nombre" => $nombre, "apellido" => $apellido];
+
             echo json_encode(["status" => "ok", "message" => "OK"]);
         }
     } else {
